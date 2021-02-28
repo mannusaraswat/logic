@@ -23,7 +23,7 @@ class EmailController extends Controller
         $email = Email::where('user_id', $id)->first();
 
         // checking user count making url expire
-        if ($email->count > 4) {
+        if ($email->count >= $email->limit) {
             abort(419);
         } else {
             $path = storage_path('app/' . $email->path);
