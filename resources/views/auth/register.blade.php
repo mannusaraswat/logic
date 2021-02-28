@@ -68,12 +68,18 @@
                                    class="col-md-4 col-form-label text-md-right">{{ __('Select Product') }}</label>
 
                             <div class="col-md-6">
-                                <select id="product" name="product_id" class="form-control" required>
+                                <select id="product" name="product_id" class="form-control @error('product_id') is-invalid @enderror">
                                     @foreach(\App\Models\Product::all() as $product)
                                         <option value="{{$product->id}}">{{$product->name}}</option>
                                     @endforeach
                                 </select>
+                                @error('product_id')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
+
                         </div>
 
                         <div class="form-group row mb-0">
